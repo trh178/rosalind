@@ -55,15 +55,6 @@ split :: [a] -> [([a],[a])]
 split [] = []
 split [_] = []
 split (x:xs) = ([x],xs) : [(x:ls,rs) | (ls,rs) <- split xs]
-
--- Creates all possible Expressions from a list of Ints
-exprs :: [Int] -> [Expr]
-exprs [] = []
-exprs [n] = [Val n]
-exprs ns = [e | (ls,rs) <- split ns
-				, l <- exprs ls
-				, r <- exprs rs
-				, e <- combine l r]
 	
 -- 	Combine two results using all possible operators				
 combine' :: Result -> Result -> [Result]
